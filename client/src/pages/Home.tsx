@@ -144,14 +144,14 @@ const faqs = [
   { q: "How does AI smart routing help ambulances?", a: "Our AI system communicates with traffic management infrastructure to turn signals green on the ambulance route and guide the fastest available path in real time." },
 ];
 
-/* ---------- team — same sequence as Figma ---------- */
+/* ---------- team — exact Figma sequence with correct photo mapping ---------- */
 const teamRow1 = [
-  { name: "Amit Kumar Prasad", role: "Project Director & Hardware Lead", photo: "/team-amit.jpeg" },
-  { name: "Chandrashekhar Ahirwar", role: "Dashboard & Backend Lead", photo: "/team-chandrashekhar.jpeg" },
+  { name: "Amit Kumar Prasad", role: "Project Director & Hardware Lead", photo: "/team-kamal.jpeg" },
+  { name: "Chandrashekhar Ahirwar", role: "Dashboard & Backend Lead", photo: "/team-amit.jpeg" },
   { name: "Hataf Rakshi", role: "App Development Lead", photo: null },
 ];
 const teamRow2 = [
-  { name: "Kamal Das", role: "Pitch & Presentation Lead", photo: "/team-kamal.jpeg" },
+  { name: "Kamal Das", role: "Pitch & Presentation Lead", photo: "/team-chandrashekhar.jpeg" },
   { name: "Mohak Verma", role: "Mechanical Domain Lead", photo: null },
 ];
 
