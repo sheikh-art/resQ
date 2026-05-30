@@ -1,11 +1,11 @@
 import { Link } from "wouter";
-import { Shield, MapPin, Heart, Navigation, Bell, Clock, Wifi, ChevronDown, ChevronRight, ArrowRight, Play, X, Ambulance, Smartphone, Download, User } from "lucide-react";
+import { Shield, MapPin, Heart, Navigation, Bell, Clock, Wifi, ChevronDown, ChevronRight, Play, X, Ambulance, Smartphone, Download, User, Monitor, Zap, Lock, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-/* ---------- animated counter hook ---------- */
+/* ---------- animated counter ---------- */
 function useCountUp(target: number, duration = 2000, active = false) {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -61,7 +61,7 @@ function SOSModal({ onClose }: { onClose: () => void }) {
           <button onClick={onClose} data-testid="button-close-modal"><X className="w-4 h-4 text-gray-400 hover:text-white" /></button>
         </div>
         <div className="rounded-xl overflow-hidden mb-4 h-36">
-          <img src="/accident-scene.png" alt="emergency" className="w-full h-full object-cover" style={{objectPosition:'50% 30%'}} />
+          <img src="/accident-scene.png" alt="emergency" className="w-full h-full object-cover" style={{ objectPosition: '50% 30%' }} />
         </div>
         <div className="space-y-2">
           {steps.map((s, i) => (
@@ -88,13 +88,52 @@ function SOSModal({ onClose }: { onClose: () => void }) {
 }
 
 /* ---------- data ---------- */
-const features = [
-  { icon: Ambulance, title: "Ambulance Details", desc: "Real-time ambulance tracking with driver details, ETA and live route info." },
-  { icon: Navigation, title: "AI Smart Routing", desc: "AI-powered routing clears traffic signals and finds the fastest path." },
-  { icon: Bell, title: "See Top SOS", desc: "View and respond to nearest active SOS calls in your area instantly." },
-  { icon: Heart, title: "Bystander Help", desc: "Guide bystanders with first-aid instructions until professional help arrives." },
-  { icon: Clock, title: "History / Alert", desc: "Full incident history, alerts and real-time notifications for all responders." },
-  { icon: Wifi, title: "Offline Mode", desc: "Core features work without internet — because emergencies don't wait." },
+const appFeatures = [
+  { icon: Ambulance, title: "Ambulance Details", desc: "Real-time ambulance tracking with driver name, vehicle number, ETA and live route on map." },
+  { icon: Navigation, title: "AI Smart Routing", desc: "AI-powered routing automatically clears traffic signals on ambulance path for fastest response." },
+  { icon: Bell, title: "See Top SOS", desc: "View and respond to nearest active SOS calls in your area — be a hero to someone in need." },
+  { icon: Heart, title: "Bystander Help", desc: "Step-by-step first-aid guide is sent to trained bystanders within 200m of the incident." },
+  { icon: Clock, title: "History / Alerts", desc: "Full incident timeline, real-time push alerts and audio notifications for all responders." },
+  { icon: Wifi, title: "Offline Mode", desc: "Core SOS features work without internet via SMS fallback — because emergencies don't wait." },
+];
+
+const products = [
+  {
+    icon: Smartphone,
+    title: "ResQ Citizen App",
+    tag: "For Everyone",
+    color: "bg-blue-500",
+    tagColor: "bg-blue-50 text-blue-600",
+    desc: "One-tap SOS, auto crash detection, bystander first-aid guide, and real-time ambulance tracking — all in one app.",
+    points: ["Auto crash detection via sensors", "One-tap SOS with GPS sharing", "Live ambulance ETA tracking", "First-aid guide for nearby bystanders"],
+  },
+  {
+    icon: Zap,
+    title: "ResQ Responder",
+    tag: "For Ambulances & EMTs",
+    color: "bg-orange-500",
+    tagColor: "bg-orange-50 text-orange-600",
+    desc: "AI-routed dispatch, traffic signal override, and live incident dashboard — built for speed in real field conditions.",
+    points: ["AI-powered fastest route", "Live traffic signal clearance", "Patient info before arrival", "Incident documentation tools"],
+  },
+  {
+    icon: Monitor,
+    title: "ResQ Command Center",
+    tag: "For Hospitals & Cities",
+    color: "bg-red-500",
+    tagColor: "bg-red-50 text-red-600",
+    desc: "Full-city emergency operations dashboard — manage fleets, track incidents, and coordinate across the entire network.",
+    points: ["City-wide live incident map", "Fleet management & dispatch", "Analytics & response metrics", "API integration with existing systems"],
+  },
+];
+
+const techFeatures = [
+  { icon: Wifi, title: "Works Offline", desc: "Core SOS features work without internet using SMS fallback — essential for rural India." },
+  { icon: Lock, title: "End-to-End Encrypted", desc: "All emergency data is encrypted in transit and at rest. Privacy is non-negotiable." },
+  { icon: Zap, title: "Sub-30s Response", desc: "From SOS trigger to ambulance dispatch in under 30 seconds — faster than any manual system." },
+  { icon: Users, title: "Crowdsourced Help", desc: "Trained bystanders nearby receive alerts and can begin first aid within minutes of a crash." },
+  { icon: MapPin, title: "Hyper-Local Routing", desc: "Routing trained on Indian roads — knows lanes, shortcuts and hospital entry points." },
+  { icon: Monitor, title: "City-Scale Dashboard", desc: "Municipal corporations and hospitals get real-time oversight of all active incidents." },
 ];
 
 const faqs = [
@@ -105,7 +144,7 @@ const faqs = [
   { q: "How does AI smart routing help ambulances?", a: "Our AI system communicates with traffic management infrastructure to turn signals green on the ambulance route and guide the fastest available path in real time." },
 ];
 
-/* ---------- real team data matching Figma ---------- */
+/* ---------- team — same sequence as Figma ---------- */
 const teamRow1 = [
   { name: "Amit Kumar Prasad", role: "Project Director & Hardware Lead", photo: "/team-amit.jpeg" },
   { name: "Chandrashekhar Ahirwar", role: "Dashboard & Backend Lead", photo: "/team-chandrashekhar.jpeg" },
@@ -155,86 +194,43 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ═══════════════════════════════════════════════
-          HERO — Two real images at the very top
+      {/* ══════════════════════════════════════════
+          HERO — Clean, full-screen, no extra images
           Background: night highway (hero-bg.png)
-          Left: accident scene, Right: app mockup
-      ════════════════════════════════════════════════ */}
-      <section className="relative text-white overflow-hidden min-h-screen flex flex-col">
+      ═════════════════════════════════════════════ */}
+      <section className="relative text-white overflow-hidden min-h-screen flex items-center">
         {/* Night highway background */}
         <div className="absolute inset-0">
-          <img src="/hero-bg.png" alt="" className="w-full h-full object-cover" style={{objectPosition:'50% 60%'}} />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90" />
+          <img src="/hero-bg.png" alt="" className="w-full h-full object-cover" style={{ objectPosition: '50% 60%' }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/85" />
         </div>
 
-        <div className="relative flex-1 max-w-6xl mx-auto px-4 sm:px-6 w-full flex flex-col justify-between py-10">
-          {/* Top: Two featured images */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-            {/* Accident scene with ResQ notification */}
-            <div className="rounded-2xl overflow-hidden shadow-2xl h-64 md:h-80 relative group" data-testid="img-accident-scene">
-              <img
-                src="/accident-scene.png"
-                alt="ResQ — Help is on the way"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                style={{objectPosition: '50% 30%'}}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3">
-                <span className="bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full border border-white/20">
-                  🚨 AI detects crash → Alerts dispatched in &lt;2 seconds
-                </span>
-              </div>
-            </div>
-            {/* Phone app mockup */}
-            <div className="rounded-2xl overflow-hidden shadow-2xl h-64 md:h-80 relative group" data-testid="img-app-mockup">
-              <img
-                src="/app-mockup.jpg"
-                alt="ResQ App — AI-Powered Emergency Response"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                style={{objectPosition: '50% 20%'}}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <div className="absolute bottom-3 left-3 right-3">
-                <span className="bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full border border-white/20">
-                  📱 ResQ App — Nearest services. One tap away.
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Center: ResQ logo + tagline + CTA */}
-          <div className="text-center">
-            <img src="/resq-logo.png" alt="ResQ" className="w-16 h-16 object-contain mx-auto mb-4 drop-shadow-2xl" />
-            <h1 className="text-5xl md:text-7xl font-black leading-none mb-2 tracking-tight">
-              Res<span className="text-red-400">Q</span>
-            </h1>
-            <p className="text-red-400 font-semibold text-base mb-3 tracking-widest uppercase">Every second counts</p>
-            <p className="text-gray-300 text-sm md:text-base max-w-lg mx-auto mb-8 leading-relaxed">
-              Smart accident detection and instant emergency response system designed to save lives on the road.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 flex-wrap justify-center">
-              <Link href="/about">
-                <Button variant="outline" className="border-white/50 text-white hover:bg-white/15 rounded-full px-7 py-5 text-sm bg-transparent" data-testid="button-hero-home">
-                  Go to About
-                </Button>
-              </Link>
-              <Button
-                onClick={() => setShowSOS(true)}
-                className="bg-red-500 hover:bg-red-600 text-white rounded-full px-7 py-5 text-sm shadow-lg shadow-red-500/40"
-                data-testid="button-hero-demo"
-              >
-                <Play className="w-3.5 h-3.5 mr-2" /> Watch Demo
+        <div className="relative w-full max-w-4xl mx-auto px-4 sm:px-6 text-center py-24">
+          <img src="/resq-logo.png" alt="ResQ" className="w-20 h-20 object-contain mx-auto mb-6 drop-shadow-2xl" />
+          <h1 className="text-6xl md:text-8xl font-black leading-none mb-3 tracking-tight">
+            Res<span className="text-red-400">Q</span>
+          </h1>
+          <p className="text-red-400 font-semibold text-sm mb-5 tracking-[0.25em] uppercase">Every second counts</p>
+          <p className="text-gray-300 text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
+            Smart accident detection and instant emergency response system designed to save lives on Indian roads.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button
+              onClick={() => setShowSOS(true)}
+              className="bg-red-500 hover:bg-red-600 text-white rounded-full px-8 py-6 text-base font-semibold shadow-lg shadow-red-500/40"
+              data-testid="button-hero-demo"
+            >
+              <Play className="w-4 h-4 mr-2" /> Watch Live Demo
+            </Button>
+            <Link href="/product">
+              <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-8 py-6 text-base bg-transparent" data-testid="button-hero-features">
+                Explore Features <ChevronRight className="ml-1 w-4 h-4" />
               </Button>
-              <Link href="/product">
-                <Button variant="outline" className="border-white/50 text-white hover:bg-white/15 rounded-full px-7 py-5 text-sm bg-transparent" data-testid="button-hero-features">
-                  Explore Features
-                </Button>
-              </Link>
-            </div>
-            <div className="mt-8 flex flex-col items-center gap-1 text-gray-400 text-xs animate-bounce">
-              <span>scroll</span>
-              <ChevronDown className="w-4 h-4" />
-            </div>
+            </Link>
+          </div>
+          <div className="mt-14 flex flex-col items-center gap-1 text-gray-500 text-xs animate-bounce">
+            <span>scroll</span>
+            <ChevronDown className="w-4 h-4" />
           </div>
         </div>
       </section>
@@ -244,13 +240,13 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Every Second Counts</h2>
           <p className="text-gray-500 max-w-xl mx-auto mb-12">Road accidents are one of India's biggest crises — and most deaths are preventable with faster response.</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
             {[
               { num: "2k+", label: "Road accident deaths per day in India" },
               { num: "98%", label: "Preventable with timely response", highlight: true },
               { num: "18 min", label: "Average ambulance wait time currently" },
             ].map((s) => (
-              <div key={s.num} className={`flex flex-col items-center p-6 rounded-2xl ${s.highlight ? "bg-red-500 text-white" : "bg-red-50"}`}>
+              <div key={s.num} className={`flex flex-col items-center p-8 rounded-2xl ${s.highlight ? "bg-red-500 text-white" : "bg-red-50"}`}>
                 <span className={`text-5xl font-bold mb-2 ${s.highlight ? "text-white" : "text-red-500"}`}>{s.num}</span>
                 <span className={`text-sm font-medium ${s.highlight ? "text-red-100" : "text-gray-600"}`}>{s.label}</span>
               </div>
@@ -259,7 +255,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Three Steps */}
+      {/* How It Works */}
       <section className="bg-red-50 py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
           <span className="text-red-500 font-semibold text-sm uppercase tracking-widest">How it works</span>
@@ -284,17 +280,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Grid */}
+      {/* ══════════════════════════════════════════
+          Three Products — from demo
+      ═════════════════════════════════════════════ */}
       <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <span className="text-red-500 font-semibold text-sm uppercase tracking-widest">Features</span>
+            <span className="text-red-500 font-semibold text-sm uppercase tracking-widest">Products</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-3">Three Products. One Mission.</h2>
+            <p className="text-gray-500 max-w-md mx-auto">Every layer of ResQ is designed to work independently — and exponentially better together.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {products.map((p) => (
+              <div key={p.title} className="rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-shadow" data-testid={`card-product-${p.title.replace(/\s+/g, '-').toLowerCase()}`}>
+                <div className={`w-12 h-12 ${p.color} rounded-xl flex items-center justify-center mb-4`}>
+                  <p.icon className="w-6 h-6 text-white" />
+                </div>
+                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${p.tagColor}`}>{p.tag}</span>
+                <h3 className="text-lg font-bold text-gray-900 mt-3 mb-2">{p.title}</h3>
+                <p className="text-gray-500 text-sm mb-4 leading-relaxed">{p.desc}</p>
+                <ul className="space-y-2">
+                  {p.points.map((pt) => (
+                    <li key={pt} className="flex items-start gap-2 text-gray-700 text-sm">
+                      <span className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0" />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          App Features (6 from demo)
+      ═════════════════════════════════════════════ */}
+      <section className="bg-gray-50 py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <span className="text-red-500 font-semibold text-sm uppercase tracking-widest">App Features</span>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-3">Everything You Need in One Place</h2>
-            <p className="text-gray-500 max-w-md mx-auto">Built for real Indian roads — with features that actually work in the field.</p>
+            <p className="text-gray-500 max-w-md mx-auto">Built for real Indian roads — features that actually work in the field.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {features.map((f) => (
-              <div key={f.title} className="group p-6 rounded-2xl border border-gray-100 hover:border-red-200 hover:shadow-md transition-all bg-white" data-testid={`card-feature-${f.title.replace(/\s+/g,'-').toLowerCase()}`}>
+            {appFeatures.map((f) => (
+              <div key={f.title} className="group p-6 rounded-2xl border border-gray-100 hover:border-red-200 hover:shadow-md transition-all bg-white" data-testid={`card-feature-${f.title.replace(/\s+/g, '-').toLowerCase()}`}>
                 <div className="w-11 h-11 bg-red-50 group-hover:bg-red-500 rounded-xl flex items-center justify-center mb-4 transition-colors">
                   <f.icon className="w-5 h-5 text-red-500 group-hover:text-white transition-colors" />
                 </div>
@@ -306,28 +337,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* App Showcase — accident scene + app mockup side by side (secondary use) */}
-      <section className="bg-gray-900 py-16 overflow-hidden">
+      {/* ══════════════════════════════════════════
+          Tech Features (6 from demo)
+      ═════════════════════════════════════════════ */}
+      <section className="bg-gray-900 py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <span className="text-red-400 font-semibold text-sm uppercase tracking-widest">Technology</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-3">Built to Save Lives at Scale</h2>
+            <p className="text-gray-400 max-w-md mx-auto">The technology behind ResQ is designed for India's roads, infrastructure and connectivity challenges.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {techFeatures.map((f) => (
+              <div key={f.title} className="group p-6 rounded-2xl border border-gray-700 hover:border-red-500/50 hover:bg-gray-800 transition-all bg-gray-800/50" data-testid={`card-tech-${f.title.replace(/\s+/g, '-').toLowerCase()}`}>
+                <div className="w-11 h-11 bg-red-500/10 group-hover:bg-red-500 rounded-xl flex items-center justify-center mb-4 transition-colors">
+                  <f.icon className="w-5 h-5 text-red-400 group-hover:text-white transition-colors" />
+                </div>
+                <h3 className="font-semibold text-white mb-2">{f.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* App Download */}
+      <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div>
-              <span className="text-red-400 font-semibold text-sm uppercase tracking-widest">The App</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">
+              <span className="text-red-500 font-semibold text-sm uppercase tracking-widest">The App</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
                 One Tap.<br />One Location.<br />One Dispatch.
               </h2>
-              <p className="text-gray-400 leading-relaxed mb-6">
-                The ResQ citizen app puts emergency response in your pocket. Nearest trauma centres, ambulances, police and rescue teams — visible in seconds. One big "Request Help Now" button that does everything.
+              <p className="text-gray-500 leading-relaxed mb-6">
+                The ResQ citizen app puts emergency response in your pocket. Nearest trauma centres, ambulances, police and rescue teams — visible in seconds.
               </p>
               <ul className="space-y-3 mb-8">
                 {["Auto crash detection — no action needed", "Nearest emergency services with ETA", "Live tracking of your ambulance", "First-aid guide for bystanders near you"].map((pt) => (
-                  <li key={pt} className="flex items-center gap-2.5 text-gray-300 text-sm">
+                  <li key={pt} className="flex items-center gap-2.5 text-gray-600 text-sm">
                     <span className="w-1.5 h-1.5 bg-red-400 rounded-full flex-shrink-0" />
                     {pt}
                   </li>
                 ))}
               </ul>
               <div className="flex gap-3">
-                <a href="#" className="flex items-center gap-2 bg-white text-gray-900 rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-gray-100 transition-colors" data-testid="button-app-store">
+                <a href="#" className="flex items-center gap-2 bg-gray-900 text-white rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-gray-800 transition-colors" data-testid="button-app-store">
                   <Smartphone className="w-4 h-4" />
                   App Store
                 </a>
@@ -337,17 +392,11 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            {/* Real phone mockup photo */}
             <div className="relative flex justify-center">
-              <div className="w-64 h-80 rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-700">
-                <img
-                  src="/app-mockup.jpg"
-                  alt="ResQ App"
-                  className="w-full h-full object-cover"
-                  style={{objectPosition: '50% 10%'}}
-                />
+              <div className="w-64 h-[26rem] rounded-3xl overflow-hidden shadow-2xl border-4 border-gray-100">
+                <img src="/app-mockup.jpg" alt="ResQ App" className="w-full h-full object-cover" style={{ objectPosition: '50% 10%' }} />
               </div>
-              <div className="absolute -right-2 top-6 bg-red-500 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg shadow-red-500/40 animate-pulse">
+              <div className="absolute -right-2 top-8 bg-red-500 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg shadow-red-500/40 animate-pulse">
                 AI-Powered
               </div>
             </div>
@@ -355,7 +404,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Impact Numbers — animated */}
+      {/* Impact Numbers */}
       <section ref={statsRef.ref} className="bg-red-500 py-16 text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-10">Built for Impact, Built for India</h2>
@@ -374,11 +423,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          TEAM — Exact Figma layout
-          Row 1: 3 members (Amit, Chandrashekhar, Hataf)
-          Row 2: 2 members centered (Kamal, Mohak)
-      ════════════════════════════════════════════════ */}
+      {/* ══════════════════════════════════════════
+          TEAM — Exact Figma: row1 (3), row2 (2 centered)
+          Sequence: Amit, Chandrashekhar, Hataf | Kamal, Mohak
+      ═════════════════════════════════════════════ */}
       <section className="bg-white py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
           <p className="text-red-500 text-xs font-semibold tracking-[0.25em] uppercase mb-4">THE TEAM</p>
@@ -390,12 +438,7 @@ export default function Home() {
               <div key={member.name} className="flex flex-col items-center gap-4 w-40" data-testid={`card-team-${member.name.split(' ')[0].toLowerCase()}`}>
                 <div className="w-36 h-36 rounded-full overflow-hidden border-2 border-gray-300 bg-gray-100 flex items-center justify-center flex-shrink-0 shadow-sm">
                   {member.photo ? (
-                    <img
-                      src={member.photo}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                      style={{ objectPosition: "50% 20%" }}
-                    />
+                    <img src={member.photo} alt={member.name} className="w-full h-full object-cover" style={{ objectPosition: "50% 20%" }} />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gray-50">
                       <User className="w-16 h-16 text-gray-300" strokeWidth={1} />
@@ -416,12 +459,7 @@ export default function Home() {
               <div key={member.name} className="flex flex-col items-center gap-4 w-40" data-testid={`card-team-${member.name.split(' ')[0].toLowerCase()}`}>
                 <div className="w-36 h-36 rounded-full overflow-hidden border-2 border-gray-300 bg-gray-100 flex items-center justify-center flex-shrink-0 shadow-sm">
                   {member.photo ? (
-                    <img
-                      src={member.photo}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                      style={{ objectPosition: "50% 20%" }}
-                    />
+                    <img src={member.photo} alt={member.name} className="w-full h-full object-cover" style={{ objectPosition: "50% 20%" }} />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gray-50">
                       <User className="w-16 h-16 text-gray-300" strokeWidth={1} />
@@ -481,7 +519,7 @@ export default function Home() {
             </Link>
             <Link href="/product">
               <Button variant="outline" className="border-red-200 text-red-500 hover:bg-red-50 rounded-full px-8 py-6 text-base" data-testid="button-cta-demo">
-                See a Demo <ChevronRight className="ml-1 w-4 h-4" />
+                See Full Product <ChevronRight className="ml-1 w-4 h-4" />
               </Button>
             </Link>
           </div>
