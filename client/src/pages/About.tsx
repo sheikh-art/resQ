@@ -24,10 +24,12 @@ export default function About() {
       <Navbar />
 
       {/* Hero */}
-      <section className="bg-[#0a0e1f] text-white py-24 md:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0e1f] to-[#0d1a1a]" />
-        <div className="absolute inset-0" style={{backgroundImage:"radial-gradient(ellipse at 50% 60%, rgba(229,62,62,0.1) 0%, transparent 60%)"}} />
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center">
+      <section className="relative text-white py-24 md:py-32 overflow-hidden min-h-[80vh] flex items-center">
+        <div className="absolute inset-0 overflow-hidden">
+          <img src="/collage1.jpeg" alt="" className="w-full h-full object-cover" style={{objectPosition: '50% 18%'}} />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80" />
+        </div>
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center w-full">
           <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm mb-6">
             <Shield className="w-3.5 h-3.5 text-red-400" />
             Our Mission
@@ -146,13 +148,21 @@ export default function About() {
         </div>
       </section>
 
-      {/* Dark CTA */}
-      <section className="bg-[#0a0e1f] text-white py-20 relative overflow-hidden">
-        <div className="absolute inset-0" style={{backgroundImage:"radial-gradient(ellipse at 50% 100%, rgba(229,62,62,0.15) 0%, transparent 60%)"}} />
+      {/* Dark CTA — real responders photo */}
+      <section className="relative text-white py-20 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <img
+            src="/collage1.jpeg"
+            alt="ResQ responders"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: "90% 95%" }}
+          />
+          <div className="absolute inset-0 bg-black/75" />
+        </div>
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center">
+          <p className="text-red-400 font-bold text-sm uppercase tracking-widest mb-3">This Isn't a Product.</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            This Isn't a Product.<br />
-            <span className="text-red-400">It's a Response to a Real Failure.</span>
+            It's a Response to a Real Failure.
           </h2>
           <p className="text-gray-400 max-w-lg mx-auto mb-10 leading-relaxed">
             India's emergency response system has failed its people for decades. ResQ is our answer. Join the movement.

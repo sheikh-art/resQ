@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Shield } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const links = [
@@ -18,9 +18,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group" data-testid="link-logo">
-          <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center group-hover:bg-red-600 transition-colors">
-            <Shield className="w-5 h-5 text-white" />
-          </div>
+          <img src="/resq-logo.png" alt="ResQ Logo" className="w-9 h-9 object-contain" />
           <span className="font-bold text-xl text-gray-900">Res<span className="text-red-500">Q</span></span>
         </Link>
 

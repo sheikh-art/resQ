@@ -58,8 +58,10 @@ export default function Product() {
 
       {/* Hero */}
       <section className="bg-[#0a0e1f] text-white py-24 md:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0e1f] to-[#1a0a0a]" />
-        <div className="absolute inset-0" style={{backgroundImage:"radial-gradient(ellipse at 30% 50%, rgba(229,62,62,0.12) 0%, transparent 60%)"}} />
+        <div className="absolute inset-0 overflow-hidden">
+          <img src="/collage2.jpeg" alt="" className="w-full h-full object-cover opacity-20" style={{objectPosition: '60% 30%'}} />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0a0e1f]/95 to-[#1a0a0a]/95" />
+        </div>
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center">
           <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm mb-6">
             <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse" />
@@ -112,10 +114,10 @@ export default function Product() {
         </div>
       </section>
 
-      {/* Command Center Highlight */}
+      {/* Command Center — real dispatch photo */}
       <section className="bg-red-50 py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div>
               <span className="text-red-500 font-semibold text-sm uppercase tracking-widest">Flagship Feature</span>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-5">ResQ Command Center</h2>
@@ -138,32 +140,18 @@ export default function Product() {
                 </Button>
               </Link>
             </div>
-            <div className="bg-gray-900 rounded-2xl p-6 shadow-xl">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                <div className="w-3 h-3 rounded-full bg-green-400" />
-                <span className="text-gray-400 text-xs ml-2">ResQ Command Center — Live</span>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between bg-gray-800 rounded-lg px-3 py-2">
-                  <span className="text-green-400 text-xs font-mono">● ACTIVE INCIDENT #2341</span>
-                  <span className="text-gray-400 text-xs">NH-48, Delhi</span>
-                </div>
-                <div className="flex items-center justify-between bg-gray-800 rounded-lg px-3 py-2">
-                  <span className="text-yellow-400 text-xs font-mono">◐ DISPATCH #AM-07</span>
-                  <span className="text-gray-400 text-xs">ETA: 4 min</span>
-                </div>
-                <div className="flex items-center justify-between bg-gray-800 rounded-lg px-3 py-2">
-                  <span className="text-blue-400 text-xs font-mono">→ SIGNAL CLEARED</span>
-                  <span className="text-gray-400 text-xs">3 junctions</span>
-                </div>
-                <div className="bg-gray-800 rounded-lg p-3 mt-3">
-                  <div className="grid grid-cols-3 gap-2 text-center">
-                    <div><div className="text-white font-bold text-lg">12</div><div className="text-gray-500 text-xs">Active</div></div>
-                    <div><div className="text-green-400 font-bold text-lg">8</div><div className="text-gray-500 text-xs">Resolved</div></div>
-                    <div><div className="text-yellow-400 font-bold text-lg">4.2m</div><div className="text-gray-500 text-xs">Avg ETA</div></div>
-                  </div>
+            {/* Real dispatch center photo — bottom-left of collage1 */}
+            <div className="rounded-2xl overflow-hidden shadow-xl h-80 relative">
+              <img
+                src="/collage1.jpeg"
+                alt="ResQ Dispatch Center"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: "5% 85%" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-5">
+                <div>
+                  <p className="text-white font-bold">ResQ Dispatch Center</p>
+                  <p className="text-white/70 text-sm">One Tap. One Location. One Dispatch.</p>
                 </div>
               </div>
             </div>
@@ -187,9 +175,7 @@ export default function Product() {
                   <span className="font-semibold text-gray-900 text-sm">{step.label}</span>
                   <span className="text-gray-400 text-xs max-w-[90px] text-center">{step.desc}</span>
                 </div>
-                {i < flow.length - 1 && (
-                  <ArrowRight className="w-5 h-5 text-red-300 rotate-90 md:rotate-0 my-2 md:my-0" />
-                )}
+                {i < flow.length - 1 && <ArrowRight className="w-5 h-5 text-red-300 rotate-90 md:rotate-0 my-2 md:my-0" />}
               </div>
             ))}
           </div>
