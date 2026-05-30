@@ -23,11 +23,11 @@ export default function About() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* Hero */}
+      {/* Hero — ambulance+phone image as background */}
       <section className="relative text-white py-24 md:py-32 overflow-hidden min-h-[80vh] flex items-center">
         <div className="absolute inset-0 overflow-hidden">
-          <img src="/collage1.jpeg" alt="" className="w-full h-full object-cover" style={{objectPosition: '50% 18%'}} />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80" />
+          <img src="/ambulance-phone.jpeg" alt="" className="w-full h-full object-cover opacity-30" style={{objectPosition: '50% 50%'}} />
+          <div className="absolute inset-0 bg-[#0a0e1f]/90" />
         </div>
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center w-full">
           <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm mb-6">
@@ -61,18 +61,14 @@ export default function About() {
                 ResQ was born from a personal encounter with this failure — and a conviction that technology, applied thoughtfully, can fix it.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { num: "1.5L+", label: "Lives lost on Indian roads annually", bg: "bg-red-500 text-white" },
-                { num: "18 min", label: "Average ambulance response time in India", bg: "bg-red-50 text-gray-900" },
-                { num: "58%", label: "Deaths preventable with faster response", bg: "bg-red-50 text-gray-900" },
-                { num: "4 min", label: "ResQ average response time in pilot cities", bg: "bg-red-500 text-white" },
-              ].map((s) => (
-                <div key={s.num} className={`rounded-2xl p-6 ${s.bg}`} data-testid={`stat-about-${s.num.replace(/\W/g,'')}`}>
-                  <div className="text-3xl font-black mb-2">{s.num}</div>
-                  <div className="text-sm opacity-80 leading-tight">{s.label}</div>
-                </div>
-              ))}
+            {/* Right side — phone with Emergency Tap (right half of ambulance-phone image) */}
+            <div className="relative h-80 rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src="/ambulance-phone.jpeg"
+                alt="ResQ Emergency Tap App"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: "100% 50%" }}
+              />
             </div>
           </div>
         </div>
@@ -148,34 +144,35 @@ export default function About() {
         </div>
       </section>
 
-      {/* Dark CTA — real responders photo */}
-      <section className="relative text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <img
-            src="/collage1.jpeg"
-            alt="ResQ responders"
-            className="w-full h-full object-cover"
-            style={{ objectPosition: "90% 95%" }}
-          />
-          <div className="absolute inset-0 bg-black/75" />
+      {/* "Why We Built" — full ambulance+phone image as the UI shows */}
+      <section className="bg-white py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <span className="text-red-500 font-semibold text-sm uppercase tracking-widest block mb-4">Why We Built</span>
+          {/* Full image — exactly as in the brand creative */}
+          <div className="rounded-2xl overflow-hidden shadow-2xl w-full">
+            <img
+              src="/ambulance-phone.jpeg"
+              alt="This isn't just a product — It's a response to a real failure"
+              className="w-full h-auto object-cover"
+            />
+          </div>
         </div>
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-red-400 font-bold text-sm uppercase tracking-widest mb-3">This Isn't a Product.</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            It's a Response to a Real Failure.
-          </h2>
-          <p className="text-gray-400 max-w-lg mx-auto mb-10 leading-relaxed">
-            India's emergency response system has failed its people for decades. ResQ is our answer. Join the movement.
-          </p>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-red-500 py-16 text-white text-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Make Indian Roads Safer?</h2>
+          <p className="text-red-100 max-w-md mx-auto mb-8">Join the movement. Partner, volunteer, or integrate ResQ into your service.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/contact">
-              <Button className="bg-red-500 hover:bg-red-600 text-white rounded-full px-8 py-6 text-base font-semibold shadow-lg shadow-red-500/30" data-testid="button-about-cta-join">
-                Join the Mission <ArrowRight className="ml-2 w-4 h-4" />
+              <Button className="bg-white text-red-500 hover:bg-red-50 rounded-full px-8 py-6 text-base font-semibold" data-testid="button-about-cta-join">
+                Partner with Us
               </Button>
             </Link>
             <Link href="/product">
-              <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 rounded-full px-8 py-6 text-base bg-transparent" data-testid="button-about-cta-product">
-                See Our Platform
+              <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-8 py-6 text-base bg-transparent" data-testid="button-about-cta-product">
+                Request Demo
               </Button>
             </Link>
           </div>

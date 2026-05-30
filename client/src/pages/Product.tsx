@@ -56,10 +56,10 @@ export default function Product() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* Hero */}
+      {/* Hero — dispatch center as subtle bg */}
       <section className="bg-[#0a0e1f] text-white py-24 md:py-32 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
-          <img src="/collage2.jpeg" alt="" className="w-full h-full object-cover opacity-20" style={{objectPosition: '60% 30%'}} />
+          <img src="/dispatch-center.jpeg" alt="" className="w-full h-full object-cover opacity-15" style={{objectPosition: '50% 30%'}} />
           <div className="absolute inset-0 bg-gradient-to-br from-[#0a0e1f]/95 to-[#1a0a0a]/95" />
         </div>
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 text-center">
@@ -114,47 +114,44 @@ export default function Product() {
         </div>
       </section>
 
-      {/* Command Center — real dispatch photo */}
-      <section className="bg-red-50 py-16">
+      {/* Command Center — full dispatch center photo as in UI */}
+      <section className="bg-white py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            <div>
-              <span className="text-red-500 font-semibold text-sm uppercase tracking-widest">Flagship Feature</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-5">ResQ Command Center</h2>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Give city administrators and hospital networks a live window into every emergency unfolding in their jurisdiction. Track ambulances, manage dispatch, and analyse response performance — all in one dashboard.
-              </p>
-              <ul className="space-y-3 mb-8">
-                {["Real-time city-wide incident map", "Drag-and-drop fleet dispatch", "Response time analytics & SLA reporting", "Direct integration with hospital ER systems"].map((pt) => (
-                  <li key={pt} className="flex items-center gap-3 text-gray-700 text-sm">
-                    <span className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
-                      <CheckCircle className="w-3 h-3 text-white" />
-                    </span>
-                    {pt}
-                  </li>
-                ))}
-              </ul>
-              <Link href="/contact">
-                <Button className="bg-red-500 hover:bg-red-600 text-white rounded-full px-7" data-testid="button-command-demo">
-                  Request a Demo
-                </Button>
-              </Link>
-            </div>
-            {/* Real dispatch center photo — bottom-left of collage1 */}
-            <div className="rounded-2xl overflow-hidden shadow-xl h-80 relative">
-              <img
-                src="/collage1.jpeg"
-                alt="ResQ Dispatch Center"
-                className="w-full h-full object-cover"
-                style={{ objectPosition: "5% 85%" }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-5">
-                <div>
-                  <p className="text-white font-bold">ResQ Dispatch Center</p>
-                  <p className="text-white/70 text-sm">One Tap. One Location. One Dispatch.</p>
-                </div>
+          <div className="text-center mb-6">
+            <span className="text-red-500 font-semibold text-sm uppercase tracking-widest">Command Center</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-3">ResQ Command Center</h2>
+            <p className="text-gray-500 max-w-xl mx-auto">
+              Give city administrators and hospital networks a live window into every emergency — real-time incident map, fleet dispatch, and full analytics in one dashboard.
+            </p>
+          </div>
+          {/* Full dispatch center image — exactly as in the brand creative */}
+          <div className="rounded-2xl overflow-hidden shadow-2xl w-full mb-8">
+            <img
+              src="/dispatch-center.jpeg"
+              alt="ResQ Dispatch Center — One Tap. One Location. One Dispatch."
+              className="w-full h-auto object-cover"
+            />
+          </div>
+          {/* Feature points below the image */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              { icon: "👆", title: "One Tap", desc: "Citizens trigger SOS and the whole network activates instantly." },
+              { icon: "📍", title: "One Location", desc: "Precise GPS shared in real-time with every responder." },
+              { icon: "🚑", title: "One Dispatch", desc: "AI routes the nearest ambulance in under 30 seconds." },
+            ].map((f) => (
+              <div key={f.title} className="bg-red-50 rounded-xl p-5 text-center border border-red-100">
+                <span className="text-3xl block mb-2">{f.icon}</span>
+                <h3 className="font-bold text-gray-900 mb-1">{f.title}</h3>
+                <p className="text-gray-500 text-sm">{f.desc}</p>
               </div>
-            </div>
+            ))}
+          </div>
+          <div className="text-center mt-6">
+            <Link href="/contact">
+              <Button className="bg-red-500 hover:bg-red-600 text-white rounded-full px-8" data-testid="button-command-demo">
+                Click here to book a demo →
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
