@@ -375,48 +375,62 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════
-          TEAM — Real photos, exact Figma layout
+          TEAM — Exact Figma layout
           Row 1: 3 members (Amit, Chandrashekhar, Hataf)
           Row 2: 2 members centered (Kamal, Mohak)
       ════════════════════════════════════════════════ */}
-      <section className="bg-white py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <span className="text-red-500 font-semibold text-sm uppercase tracking-widest letter-spacing-[0.2em]">The Team</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 mb-12">Built by Innovators, for India</h2>
+      <section className="bg-white py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+          <p className="text-red-500 text-xs font-semibold tracking-[0.25em] uppercase mb-4">THE TEAM</p>
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-16">Built by Innovators, for India</h2>
 
           {/* Row 1 — 3 members */}
-          <div className="flex flex-wrap justify-center gap-10 mb-10">
+          <div className="flex flex-wrap justify-center gap-16 mb-14">
             {teamRow1.map((member) => (
-              <div key={member.name} className="flex flex-col items-center gap-3" data-testid={`card-team-${member.name.split(' ')[0].toLowerCase()}`}>
-                <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-gray-200 shadow-md bg-gray-100 flex items-center justify-center flex-shrink-0">
+              <div key={member.name} className="flex flex-col items-center gap-4 w-40" data-testid={`card-team-${member.name.split(' ')[0].toLowerCase()}`}>
+                <div className="w-36 h-36 rounded-full overflow-hidden border-2 border-gray-300 bg-gray-100 flex items-center justify-center flex-shrink-0 shadow-sm">
                   {member.photo ? (
-                    <img src={member.photo} alt={member.name} className="w-full h-full object-cover object-top" />
+                    <img
+                      src={member.photo}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: "50% 20%" }}
+                    />
                   ) : (
-                    <User className="w-12 h-12 text-gray-400" />
+                    <div className="w-full h-full flex items-center justify-center bg-gray-50">
+                      <User className="w-16 h-16 text-gray-300" strokeWidth={1} />
+                    </div>
                   )}
                 </div>
-                <div>
-                  <p className="font-bold text-gray-900 text-base">{member.name}</p>
-                  <p className="text-red-500 text-sm font-medium mt-0.5">{member.role}</p>
+                <div className="text-center">
+                  <p className="font-bold text-gray-900 text-base leading-tight">{member.name}</p>
+                  <p className="text-[#e05050] text-sm italic mt-1 leading-snug">{member.role}</p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Row 2 — 2 members centered */}
-          <div className="flex flex-wrap justify-center gap-10">
+          <div className="flex flex-wrap justify-center gap-16">
             {teamRow2.map((member) => (
-              <div key={member.name} className="flex flex-col items-center gap-3" data-testid={`card-team-${member.name.split(' ')[0].toLowerCase()}`}>
-                <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-gray-200 shadow-md bg-gray-100 flex items-center justify-center flex-shrink-0">
+              <div key={member.name} className="flex flex-col items-center gap-4 w-40" data-testid={`card-team-${member.name.split(' ')[0].toLowerCase()}`}>
+                <div className="w-36 h-36 rounded-full overflow-hidden border-2 border-gray-300 bg-gray-100 flex items-center justify-center flex-shrink-0 shadow-sm">
                   {member.photo ? (
-                    <img src={member.photo} alt={member.name} className="w-full h-full object-cover object-top" />
+                    <img
+                      src={member.photo}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: "50% 20%" }}
+                    />
                   ) : (
-                    <User className="w-12 h-12 text-gray-400" />
+                    <div className="w-full h-full flex items-center justify-center bg-gray-50">
+                      <User className="w-16 h-16 text-gray-300" strokeWidth={1} />
+                    </div>
                   )}
                 </div>
-                <div>
-                  <p className="font-bold text-gray-900 text-base">{member.name}</p>
-                  <p className="text-red-500 text-sm font-medium mt-0.5">{member.role}</p>
+                <div className="text-center">
+                  <p className="font-bold text-gray-900 text-base leading-tight">{member.name}</p>
+                  <p className="text-[#e05050] text-sm italic mt-1 leading-snug">{member.role}</p>
                 </div>
               </div>
             ))}
