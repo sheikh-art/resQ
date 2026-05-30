@@ -4,13 +4,14 @@ export const Box = (): JSX.Element => {
   return (
     <section
       aria-label="Scroll indicator"
-      className="w-fit"
+      className="flex min-h-screen w-full items-center justify-center bg-white"
       data-id="scroll-indicator"
     >
       <Button
         type="button"
         variant="ghost"
-        className="fixed top-[463px] left-[2423px] flex h-auto w-fit flex-col items-center gap-0 rounded-none p-0 hover:bg-transparent"
+        className="flex h-auto w-fit flex-col items-center gap-0 rounded-none p-0 hover:bg-transparent"
+        data-testid="button-scroll"
       >
         <span className="flex min-h-[37px] items-center justify-center [font-family:'Baloo_Bhai-Regular',Helvetica] text-[27px] font-normal leading-[normal] tracking-[0] text-[#5d5757]">
           scroll
