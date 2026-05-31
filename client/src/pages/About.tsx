@@ -95,31 +95,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="bg-white py-16">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <span className="text-red-500 font-semibold text-sm uppercase tracking-widest">Our Journey</span>
-            <h2 className="text-3xl font-bold text-gray-900 mt-2">From Idea to Movement</h2>
-          </div>
-          <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-red-100" />
-            <div className="space-y-8">
-              {timeline.map((item, i) => (
-                <div key={i} className="relative flex gap-6" data-testid={`timeline-item-${i}`}>
-                  <div className="relative z-10 w-16 h-16 bg-red-500 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                    {item.year}
-                  </div>
-                  <div className="flex-1 bg-gray-50 rounded-2xl p-5 border border-gray-100">
-                    <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Values */}
       <section className="bg-gray-50 py-16">
