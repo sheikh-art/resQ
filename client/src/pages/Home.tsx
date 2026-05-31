@@ -215,13 +215,11 @@ export default function Home() {
             Smart accident detection and instant emergency response system designed to save lives on Indian roads.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button
-              onClick={() => setShowSOS(true)}
-              className="bg-red-500 hover:bg-red-600 text-white rounded-full px-8 py-6 text-base font-semibold shadow-lg shadow-red-500/40"
-              data-testid="button-hero-demo"
-            >
-              <Play className="w-4 h-4 mr-2" /> Watch Live Demo
-            </Button>
+            <Link href="/demo">
+              <Button className="bg-red-500 hover:bg-red-600 text-white rounded-full px-8 py-6 text-base font-semibold shadow-lg shadow-red-500/40" data-testid="button-hero-demo">
+                Live Demo
+              </Button>
+            </Link>
             <Link href="/product">
               <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-8 py-6 text-base bg-transparent" data-testid="button-hero-features">
                 Explore Features <ChevronRight className="ml-1 w-4 h-4" />
