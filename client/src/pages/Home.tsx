@@ -148,11 +148,11 @@ const faqs = [
 const teamRow1 = [
   { name: "Amit Kumar Prasad", role: "Project Director & Hardware Lead", photo: "/team-kamal.jpeg" },
   { name: "Chandrashekhar Ahirwar", role: "Dashboard & Backend Lead", photo: "/team-amit.jpeg" },
-  { name: "Hataf Rakshi", role: "App Development Lead", photo: null },
+  { name: "Hataf Rakshi", role: "App Development Lead", photo: "/team-hataf.jpeg" },
 ];
 const teamRow2 = [
   { name: "Kamal Das", role: "Pitch & Presentation Lead", photo: "/team-chandrashekhar.jpeg" },
-  { name: "Mohak Verma", role: "Mechanical Domain Lead", photo: null },
+  { name: "Mohak Verma", role: "Mechanical Domain Lead", photo: "/team-mohak.jpeg" },
 ];
 
 /* ---------- live ticker ---------- */

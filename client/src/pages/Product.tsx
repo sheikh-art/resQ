@@ -156,23 +156,31 @@ export default function Product() {
         </div>
       </section>
 
-      {/* Flow */}
+      {/* Flow — exact match to design screenshot */}
       <section className="bg-white py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <span className="text-red-500 font-semibold text-sm uppercase tracking-widest">How It Flows</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-12">Three Products. One Seamless Flow.</h2>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-0">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-14">Three Products. One Seamless Flow.</h2>
+          <div className="flex flex-col md:flex-row items-start justify-center gap-0">
             {flow.map((step, i) => (
-              <div key={step.step} className="flex flex-col md:flex-row items-center">
-                <div className="flex flex-col items-center gap-2 px-4 py-2" data-testid={`step-flow-${i}`}>
-                  <div className="w-14 h-14 bg-red-500 rounded-full flex items-center justify-center shadow-lg shadow-red-200">
-                    <step.icon className="w-6 h-6 text-white" />
+              <div key={step.step} className="flex flex-col md:flex-row items-center flex-1">
+                <div className="flex flex-col items-center gap-2 px-2 py-2 flex-1" data-testid={`step-flow-${i}`}>
+                  {/* Red circle with icon */}
+                  <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center shadow-md shadow-red-200 mb-1">
+                    <step.icon className="w-7 h-7 text-white" />
                   </div>
-                  <span className="text-xs font-bold text-red-500">Step {step.step}</span>
-                  <span className="font-semibold text-gray-900 text-sm">{step.label}</span>
-                  <span className="text-gray-400 text-xs max-w-[90px] text-center">{step.desc}</span>
+                  {/* Step label */}
+                  <span className="text-red-500 text-sm font-semibold">Step {step.step}</span>
+                  {/* Title */}
+                  <span className="font-bold text-gray-900 text-base">{step.label}</span>
+                  {/* Description */}
+                  <span className="text-gray-400 text-xs max-w-[110px] text-center leading-relaxed">{step.desc}</span>
                 </div>
-                {i < flow.length - 1 && <ArrowRight className="w-5 h-5 text-red-300 rotate-90 md:rotate-0 my-2 md:my-0" />}
+                {/* Arrow between steps */}
+                {i < flow.length - 1 && (
+                  <div className="hidden md:flex items-center self-start mt-7">
+                    <ArrowRight className="w-6 h-6 text-gray-300" />
+                  </div>
+                )}
               </div>
             ))}
           </div>
