@@ -11,7 +11,6 @@ import Footer from "@/components/Footer";
 const contactMethods = [
   { icon: Mail, title: "Email", detail: "hello@resq.in", sub: "We reply within 24 hours", color: "text-blue-500", bg: "bg-blue-50" },
   { icon: Phone, title: "Phone", detail: "+91 98765 43210", sub: "Mon–Fri, 9am–6pm IST", color: "text-green-500", bg: "bg-green-50" },
-  { icon: MapPin, title: "Office", detail: "Bengaluru, Karnataka", sub: "Koramangala, 560034", color: "text-orange-500", bg: "bg-orange-50" },
   { icon: Slack, title: "Slack", detail: "resq-community.slack.com", sub: "Join our open community", color: "text-purple-500", bg: "bg-purple-50" },
 ];
 

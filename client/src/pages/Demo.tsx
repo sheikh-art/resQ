@@ -7,6 +7,13 @@ import Footer from "@/components/Footer";
 
 type Phase = "idle" | "countdown" | "triggered" | "locating" | "dispatching" | "routing" | "arriving" | "complete";
 
+interface GeoLocation {
+  lat: number;
+  lng: number;
+  accuracy: number;
+  address?: string;
+}
+
 const steps = [
   { id: "triggered", icon: "🆘", label: "SOS Triggered", desc: "Emergency broadcast sent with GPS location", color: "bg-red-500", time: 0 },
   { id: "locating", icon: "📍", label: "Location Shared", desc: "Precise coords sent to network in <2 sec", color: "bg-orange-500", time: 2000 },
@@ -22,6 +29,8 @@ export default function Demo() {
   const [completedSteps, setCompletedSteps] = useState<string[]>([]);
   const [activeStep, setActiveStep] = useState<string | null>(null);
   const [elapsed, setElapsed] = useState(0);
+  const [location, setLocation] = useState<GeoLocation | null>(null);
+  const [locationStatus, setLocationStatus] = useState<"idle" | "fetching" | "found" | "denied">("idle");
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const elapsedRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -37,10 +46,37 @@ export default function Demo() {
     setCompletedSteps([]);
     setActiveStep(null);
     setElapsed(0);
+    setLocation(null);
+    setLocationStatus("idle");
   }
 
-  function triggerSOS() {
+  function fetchRealLocation(): Promise<GeoLocation | null> {
+    return new Promise((resolve) => {
+      if (!navigator.geolocation) { resolve(null); return; }
+      setLocationStatus("fetching");
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const loc: GeoLocation = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+            accuracy: Math.round(pos.coords.accuracy),
+          };
+          setLocation(loc);
+          setLocationStatus("found");
+          resolve(loc);
+        },
+        () => {
+          setLocationStatus("denied");
+          resolve(null);
+        },
+        { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
+      );
+    });
+  }
+
+  async function triggerSOS() {
     if (phase !== "idle") return;
+    fetchRealLocation();
     setPhase("countdown");
     setCountdown(3);
   }
@@ -204,19 +240,62 @@ export default function Demo() {
 
           {/* Right — Location / Info Panel */}
           <div className="flex flex-col gap-4">
-            {/* Simulated GPS info */}
+            {/* Real GPS info */}
             <div className="bg-gray-900 rounded-2xl border border-gray-800 p-5">
-              <p className="text-gray-400 text-xs mb-3 font-semibold uppercase tracking-wider">Live Location</p>
+              <p className="text-gray-400 text-xs mb-3 font-semibold uppercase tracking-wider flex items-center gap-2">
+                Live Location
+                {locationStatus === "fetching" && <span className="text-yellow-400 text-xs font-normal animate-pulse">• Fetching GPS...</span>}
+                {locationStatus === "found" && <span className="text-green-400 text-xs font-normal">• GPS Locked</span>}
+                {locationStatus === "denied" && <span className="text-red-400 text-xs font-normal">• Permission denied</span>}
+              </p>
               <div className="flex items-start gap-3">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${isActive ? "bg-red-500" : "bg-gray-700"}`}>
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors ${locationStatus === "found" ? "bg-red-500" : locationStatus === "fetching" ? "bg-yellow-500" : "bg-gray-700"}`}>
                   <MapPin className="w-5 h-5 text-white" />
                 </div>
-                <div>
-                  <p className="text-white font-semibold text-sm">NH-48, Gurugram</p>
-                  <p className={`text-xs mt-0.5 ${isActive ? "text-green-400" : "text-gray-500"}`}>
-                    {isActive ? "28.4595° N, 77.0266° E — Broadcasting" : "Waiting for SOS trigger"}
-                  </p>
-                  <p className="text-gray-500 text-xs mt-1">Accuracy: ±3 meters</p>
+                <div className="flex-1 min-w-0">
+                  {locationStatus === "idle" && (
+                    <>
+                      <p className="text-gray-400 font-medium text-sm">Waiting for SOS trigger</p>
+                      <p className="text-gray-600 text-xs mt-0.5">Your real GPS will be fetched on SOS tap</p>
+                    </>
+                  )}
+                  {locationStatus === "fetching" && (
+                    <>
+                      <p className="text-yellow-400 font-semibold text-sm animate-pulse">Acquiring GPS signal...</p>
+                      <p className="text-gray-500 text-xs mt-0.5">Allow location permission in browser</p>
+                    </>
+                  )}
+                  {locationStatus === "found" && location && (
+                    <>
+                      <p className="text-green-400 font-bold text-sm">📡 Broadcasting Live Location</p>
+                      <p className="text-white font-mono text-xs mt-1 bg-gray-800 px-2 py-1 rounded">
+                        {location.lat.toFixed(6)}° N, {location.lng.toFixed(6)}° E
+                      </p>
+                      <p className="text-gray-400 text-xs mt-1">Accuracy: ±{location.accuracy} meters</p>
+                      <a
+                        href={`https://www.google.com/maps?q=${location.lat},${location.lng}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 text-xs underline mt-1 inline-block hover:text-blue-300"
+                        data-testid="link-open-maps"
+                      >
+                        Open in Google Maps →
+                      </a>
+                    </>
+                  )}
+                  {locationStatus === "denied" && (
+                    <>
+                      <p className="text-red-400 font-semibold text-sm">Location permission denied</p>
+                      <p className="text-gray-500 text-xs mt-0.5">Please allow location in browser settings and retry</p>
+                      <button
+                        onClick={() => { setLocationStatus("idle"); fetchRealLocation(); }}
+                        className="text-blue-400 text-xs underline mt-1"
+                        data-testid="button-retry-location"
+                      >
+                        Retry →
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
